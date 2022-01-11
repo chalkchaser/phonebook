@@ -6,7 +6,7 @@ const People = ({persons,searchTerm, updatePersons,setNotification }) => {
 
 
  const handleDelete = (id) => {
-  const url = `http://localhost:3001/persons/${id}`
+  const url = `http://localhost:3001/api/persons/${id}`
   axios.delete(url)
     .then( response=> updatePersons())
       .catch(error => setNotification('deny'), "")//response is necessary for asynchronous handling
@@ -133,7 +133,7 @@ const App = () => {
       if(window.confirm('do you want overwrite the old number?')){
         personService.getAll()
           .then(response => response.data.find(x => x.name === newName))
-            .then(response => axios.put(`http://localhost:3001/persons/${response.id}`,{name: newName, number : newNumber}))
+            .then(response => axios.put(`http://localhost:3001/api/persons/${response.id}`,{name: newName, number : newNumber}))
               .then(response => updatePersons())
         
         
